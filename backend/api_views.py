@@ -14,3 +14,23 @@ class ScrapydList(generics.ListCreateAPIView):
 class ScrapydDetial(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Scrapyd.objects.all()
     serializer_class = serializers.ScrapydSerializer
+
+
+class ProjectList(generics.ListCreateAPIView):
+    queryset = models.Project.objects.all()
+    serializer_class = serializers.ProjectSerializer
+
+
+class ProjectDetial(generics.RetrieveUpdateDestroyAPIView):
+    queryset = models.Project.objects.all()
+    serializer_class = serializers.ProjectSerializer
+
+
+class SpiderList(generics.ListCreateAPIView):
+    queryset = models.Spider.objects.all()
+    serializer_class = serializers.SpiderSerializer
+
+
+class SpiderDetial(generics.RetrieveUpdateDestroyAPIView):
+    queryset = models.Spider.objects.all()
+    serializer_class = serializers.SpiderSerializer

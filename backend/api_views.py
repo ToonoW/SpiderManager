@@ -7,8 +7,8 @@ from backend import serializers
 class ScrapydList(generics.ListCreateAPIView):
     queryset = models.Scrapyd.objects.all()
     serializer_class = serializers.ScrapydSerializer
-    # filter_backends = (DjangoFilterBackend,)
-    # filter_fields = ('id', 'name',)
+    filter_backends = (filters.DjangoFilterBackend,)
+    filter_fields = ('id', 'name',)
 
 
 class ScrapydDetial(generics.RetrieveUpdateDestroyAPIView):
@@ -19,7 +19,8 @@ class ScrapydDetial(generics.RetrieveUpdateDestroyAPIView):
 class ProjectList(generics.ListCreateAPIView):
     queryset = models.Project.objects.all()
     serializer_class = serializers.ProjectSerializer
-
+    filter_backends = (filters.DjangoFilterBackend,)
+    filter_fields = ('id', 'name',)
 
 class ProjectDetial(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Project.objects.all()
@@ -29,6 +30,8 @@ class ProjectDetial(generics.RetrieveUpdateDestroyAPIView):
 class SpiderList(generics.ListCreateAPIView):
     queryset = models.Spider.objects.all()
     serializer_class = serializers.SpiderSerializer
+    filter_backends = (filters.DjangoFilterBackend,)
+    filter_fields = ('id', 'name',)
 
 
 class SpiderDetial(generics.RetrieveUpdateDestroyAPIView):

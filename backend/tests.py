@@ -4,7 +4,6 @@ from django.test import TestCase
 from django.http import HttpRequest
 
 from backend import models
-from backend.scrapy_info import scrapyd as scrapyd_func
 from backend import api_views
 
 
@@ -44,39 +43,6 @@ class ScrapydModelTest(TestCase):
         self.assertEqual(second_saved_scrapyd.comment, '这是一个假的阿里云服务器')
 
 
-class ScrapydInfoTest(TestCase):
-
-    def test_scrapyd_add_node(self):
-        """
-        测试增加scrapyd节点
-        """
-        first_scrapyd = {
-            'name': '1.25',
-            'ip': '192.168.1.13',
-            'port': '8600',
-            'comment': '测试的简介',
-        }
-        scrapyd_func.add_node(first_scrapyd)
-
-        first_saved_scrapyd = models.Scrapyd.objects.all().last()
-        self.assertEqual(first_saved_scrapyd.name, '1.25')
-        self.assertEqual(first_saved_scrapyd.ip, '192.168.1.13')
-        self.assertEqual(first_saved_scrapyd.port, '8600')
-        self.assertEqual(first_saved_scrapyd.comment, '测试的简介')
-
-        second_scrapyd = {
-            'name': '1.23',
-            'ip': '192.167.1.13',
-            'port': '8601',
-        }
-        scrapyd_func.add_node(second_scrapyd)
-
-        second_saved_scrapyd = models.Scrapyd.objects.all().last()
-        self.assertEqual(second_saved_scrapyd.name, '1.23')
-        self.assertEqual(second_saved_scrapyd.ip, '192.167.1.13')
-        self.assertEqual(second_saved_scrapyd.port, '8601')
-
-
 class APIViewsTest(TestCase):
     """
     测试API
@@ -98,3 +64,12 @@ class APIViewsTest(TestCase):
         api_views.ScrapydView.as_view()(request)
         item = models.Scrapyd.objects.all().last()
         self.assertEqual(item.name, '1.24')
+
+    def test_scrapyd_query_node(self):
+        """
+        测试API查询节点
+        :return:
+        """
+        request = HttpRequest()
+        request.method = 'GET'
+        print(api_views.ScrapydView.as_view()(request))

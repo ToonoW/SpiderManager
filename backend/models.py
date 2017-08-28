@@ -37,3 +37,12 @@ class Spider(models.Model):
 
     def __str__(self):
         return "{} : {}".format(self.project.name, self.name)
+
+
+class Group(models.Model):
+    """
+    分组
+    """
+    name = models.CharField(max_length=45, verbose_name='分组名称')
+    spider = models.ForeignKey('Spider')
+    comment = models.CharField(max_length=128, blank=True, null=True, verbose_name='简介')

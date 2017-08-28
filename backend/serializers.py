@@ -21,3 +21,10 @@ class SpiderSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Spider
         fields = ('id', 'name', 'project', 'comment')
+
+
+class GroupSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.Group
+        fields = ('id', 'name', 'spider', 'comment')

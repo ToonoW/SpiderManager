@@ -37,3 +37,15 @@ class SpiderList(generics.ListCreateAPIView):
 class SpiderDetial(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Spider.objects.all()
     serializer_class = serializers.SpiderSerializer
+
+
+class GroupList(generics.ListCreateAPIView):
+    queryset = models.Group.objects.all()
+    serializer_class = serializers.GroupSerializer
+    filter_backends = (filters.DjangoFilterBackend,)
+    filter_fields = ('id', 'name', 'spider')
+
+
+class GroupDetial(generics.RetrieveUpdateDestroyAPIView):
+    queryset = models.Group.objects.all()
+    serializer_class = serializers.GroupSerializer

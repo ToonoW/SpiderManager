@@ -4,6 +4,16 @@ from scrapyinfo import models
 from scrapyinfo import serializers
 
 
+def refresh_platform_information(request):
+    pass
+
+
+"""
+使用Django RESTful Framework编写的
+
+对数据模型进行增删改查的API
+"""
+
 class ScrapydList(generics.ListCreateAPIView):
     queryset = models.Scrapyd.objects.all()
     serializer_class = serializers.ScrapydSerializer
@@ -49,3 +59,4 @@ class GroupList(generics.ListCreateAPIView):
 class GroupDetial(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Group.objects.all()
     serializer_class = serializers.GroupSerializer
+

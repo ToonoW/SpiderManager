@@ -1,9 +1,9 @@
 import json
-from django.test import TestCase
-from django.http import HttpRequest
+from django.test import TestCase, Client
+from django.core.urlresolvers import reverse
 
-from scrapyinfo import models
-from scrapyinfo import api_views
+from scrapyinfo import models, api_views
+from scrapyinfo.utils import scrapyinfo
 
 
 class ScrapydModelTest(TestCase):
@@ -42,33 +42,83 @@ class ScrapydModelTest(TestCase):
         self.assertEqual(second_saved_scrapyd.comment, '这是一个假的阿里云服务器')
 
 
-class APIViewsTest(TestCase):
-    """
-    测试API
-    """
-    def test_scrapyd_add_node(self):
-        """
-        测试API增加节点
-        :return:
-        """
-        request = HttpRequest()
-        request.method = 'POST'
-        request._body = json.dumps({
-            'name': '1.24',
-            'ip': '192.168.1.24',
-            'port': '8600',
-            'comment': '内网的服务器'
-        })
+class ScraoyInfoTest(TestCase):
 
-        api_views.ScrapydView.as_view()(request)
-        item = models.Scrapyd.objects.all().last()
-        self.assertEqual(item.name, '1.24')
+    def test_fetch_projects(self):
+        """
+        测试拉取project信息
+        """
+        scrapyd = self.create_scrapyd()
 
-    def test_scrapyd_query_node(self):
+        projects = scrapyinfo.fetch_projects(scrapyd)
+        self.assertEqual(type(projects), list)
+
+    def test_update_projects(self):
         """
-        测试API查询节点
-        :return:
+        测试存储project
         """
-        request = HttpRequest()
-        request.method = 'GET'
-        print(api_views.ScrapydView.as_view()(request))
+        scrapyd = self.create_scrapyd()
+        scrapyd.save()
+
+        projects = scrapyinfo.fetch_projects(scrapyd)
+        scrapyinfo.update_projects(scrapyd, projects)
+
+        pjs = models.Project.objects.all()
+        self.assertEqual(len(projects), pjs.count())
+        for p in pjs:
+            self.assertTrue(p.name in projects)
+
+    def test_fetch_spiders(self):
+        """
+        测试拉取spider信息
+        """
+        self.test_fetch_projects()
+        self.test_update_projects()
+        project = models.Project.objects.all().last()
+
+        spiders = scrapyinfo.fetch_spiders(project)
+        self.assertEqual(type(spiders), list)
+
+    def test_update_spiders(self):
+        """
+        测试存储spider
+        """
+        self.test_fetch_projects()
+        self.test_update_projects()
+        project = models.Project.objects.all().last()
+
+        spiders = scrapyinfo.fetch_spiders(project)
+        scrapyinfo.update_spiders(project, spiders)
+
+        sps = models.Spider.objects.all()
+        self.assertEqual(len(spiders), sps.count())
+        for s in sps:
+            self.assertTrue(s.name in spiders)
+
+    def test_refresh_project_and_scrapy(self):
+        """仅进行运行测试"""
+        scrapyd = models.Scrapyd.objects.all().last()
+        if scrapyd is not None:
+            scrapyinfo.refresh_project_and_scrapy(scrapyd)
+
+    def test_refresh_all_project_and_scrapy(self):
+        """仅进行运行测试"""
+        scrapyinfo.refresh_all_project_and_scrapy()
+
+    def create_scrapyd(self):
+        scrapyd = models.Scrapyd()
+        scrapyd.name = '1.24'
+        scrapyd.ip = '192.168.1.24'
+        scrapyd.port = '8600'
+        return scrapyd
+
+
+class APITest(TestCase):
+
+    def test_refresh_platform_information(self):
+        """
+        测试刷新平台信息API
+        """
+        c = Client()
+        print(reverse('refresh-platform-information'))
+        response = c.get(reverse('refresh-platform-information'))

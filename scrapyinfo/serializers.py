@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from backend import models
+from scrapyinfo import models
 
 
 class ScrapydSerializer(serializers.ModelSerializer):
@@ -11,12 +11,16 @@ class ScrapydSerializer(serializers.ModelSerializer):
 
 class ProjectSerializer(serializers.ModelSerializer):
 
+    name = serializers.CharField(max_length=45, read_only=True)
+
     class Meta:
         model = models.Project
         fields = ('id', 'name', 'scrapyd', 'comment')
 
 
 class SpiderSerializer(serializers.ModelSerializer):
+
+    name = serializers.CharField(max_length=45, read_only=True)
 
     class Meta:
         model = models.Spider

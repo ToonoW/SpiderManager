@@ -1,7 +1,7 @@
 from rest_framework import viewsets, generics, filters
 
-from backend import models
-from backend import serializers
+from scrapyinfo import models
+from scrapyinfo import serializers
 
 
 class ScrapydList(generics.ListCreateAPIView):
@@ -16,25 +16,25 @@ class ScrapydDetial(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = serializers.ScrapydSerializer
 
 
-class ProjectList(generics.ListCreateAPIView):
+class ProjectList(generics.ListAPIView):
     queryset = models.Project.objects.all()
     serializer_class = serializers.ProjectSerializer
     filter_backends = (filters.DjangoFilterBackend,)
     filter_fields = ('id', 'name',)
 
-class ProjectDetial(generics.RetrieveUpdateDestroyAPIView):
+class ProjectDetial(generics.RetrieveUpdateAPIView):
     queryset = models.Project.objects.all()
     serializer_class = serializers.ProjectSerializer
 
 
-class SpiderList(generics.ListCreateAPIView):
+class SpiderList(generics.ListAPIView):
     queryset = models.Spider.objects.all()
     serializer_class = serializers.SpiderSerializer
     filter_backends = (filters.DjangoFilterBackend,)
     filter_fields = ('id', 'name',)
 
 
-class SpiderDetial(generics.RetrieveUpdateDestroyAPIView):
+class SpiderDetial(generics.RetrieveUpdateAPIView):
     queryset = models.Spider.objects.all()
     serializer_class = serializers.SpiderSerializer
 

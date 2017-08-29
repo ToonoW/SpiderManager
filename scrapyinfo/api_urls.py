@@ -1,6 +1,6 @@
 from django.conf.urls import url
 
-from backend import api_views
+from scrapyinfo import api_views
 
 
 urlpatterns = [

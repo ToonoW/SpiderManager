@@ -1,10 +1,9 @@
-# -*- coding: utf-8 -*-
 import json
 from django.test import TestCase
 from django.http import HttpRequest
 
-from backend import models
-from backend import api_views
+from scrapyinfo import models
+from scrapyinfo import api_views
 
 
 class ScrapydModelTest(TestCase):

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from django.db import models
 
 
@@ -44,5 +43,5 @@ class Group(models.Model):
     分组
     """
     name = models.CharField(max_length=45, verbose_name='分组名称')
-    spider = models.ForeignKey('Spider')
+    spider = models.ManyToManyField('Spider')
     comment = models.CharField(max_length=128, blank=True, null=True, verbose_name='简介')

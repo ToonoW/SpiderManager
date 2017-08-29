@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_docs',
     'django_filters',
-    'backend',
+    'scrapyinfo',
 ]
 
 MIDDLEWARE = [

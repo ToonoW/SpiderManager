@@ -2,5 +2,5 @@
 from django.apps import AppConfig
 
 
-class BackendConfig(AppConfig):
-    name = 'backend'
+class ScrapyinfoConfig(AppConfig):
+    name = 'scrapyinfo'

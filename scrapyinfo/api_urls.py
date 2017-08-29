@@ -4,7 +4,7 @@ from scrapyinfo import api_views
 
 
 urlpatterns = [
-    url(r'^refresh_platform_information$', api_views.refresh_platform_information, name='refresh-platform-information'),
+    url(r'^refresh_platform_information$', api_views.RefreshPlatformView.as_view(), name='refresh-platform-information'),
 
     url(r'^scrapyd_list$', api_views.ScrapydList.as_view(), name='scrapyd-list'),
     url(r'^scrapyd_detial/(?P<pk>[0-9]+)$', api_views.ScrapydDetial.as_view(), name='scrapyd-detial'),

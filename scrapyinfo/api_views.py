@@ -1,11 +1,24 @@
-from rest_framework import viewsets, generics, filters
+from rest_framework import generics, filters
 
+from public.views import APIView
 from scrapyinfo import models
 from scrapyinfo import serializers
+from scrapyinfo.utils import scrapyinfo as scrapyinfo_utils
 
 
-def refresh_platform_information(request):
-    pass
+class RefreshPlatformView(APIView):
+    """
+    刷新平台信息API
+    """
+    def get(self, _):
+        try:
+            scrapyinfo_utils.refresh_all_project_and_scrapy()
+            self.status = True
+        except:
+            self.status = False
+            self.msg = '刷新所有信息未能成功'
+        finally:
+            return self.json_response()
 
 
 """

@@ -122,3 +122,7 @@ class APITest(TestCase):
         c = Client()
         print(reverse('refresh-platform-information'))
         response = c.get(reverse('refresh-platform-information'))
+        data = json.loads(response.content)
+        status = data.get('status')
+        self.assertTrue(status)
+

@@ -23,12 +23,12 @@ def refresh_project_and_scrapy(scrapyd):
     根据scrapyd刷新project和scrapy
     """
     projects = fetch_projects(scrapyd)
-    update_projects(projects)
+    update_projects(scrapyd, projects)
 
     projects = models.Project.objects.filter(scrapyd=scrapyd)
     for p in projects:
         spiders = fetch_spiders(p)
-        update_spiders(spiders)
+        update_spiders(p, spiders)
 
 
 def fetch_projects(scrapyd):

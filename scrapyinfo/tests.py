@@ -58,7 +58,6 @@ class ScraoyInfoTest(TestCase):
         测试存储project
         """
         scrapyd = self.create_scrapyd()
-        scrapyd.save()
 
         projects = scrapyinfo.fetch_projects(scrapyd)
         scrapyinfo.update_projects(scrapyd, projects)
@@ -106,10 +105,13 @@ class ScraoyInfoTest(TestCase):
         scrapyinfo.refresh_all_project_and_scrapy()
 
     def create_scrapyd(self):
-        scrapyd = models.Scrapyd()
-        scrapyd.name = '1.24'
-        scrapyd.ip = '192.168.1.24'
-        scrapyd.port = '8600'
+        scrapyd = models.Scrapyd.objects.filter(name='1.24').first()
+        if scrapyd is None:
+            scrapyd = models.Scrapyd()
+            scrapyd.name = '1.24'
+            scrapyd.ip = '192.168.1.24'
+            scrapyd.port = '8600'
+            scrapyd.save()
         return scrapyd
 
 

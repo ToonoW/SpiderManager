@@ -84,3 +84,17 @@ def query_all_spiders_log():
         status['project_id'] = project.id
         status_list.append(status)
     return status_list
+
+
+def filter_spider_job_id(jobs, spider):
+    """
+    从运行的job中取出指定爬虫的id
+    :param jobs: [{"id": "422e608f9f28cef127b3d5ef93fe9399", "spider": "spider2", "start_time": "2012-09-12 10:14:03.594664"}]
+    :return ["id1", "id2"]
+    """
+    name = spider.name
+    aim_jobs = list()
+    for job in jobs:
+        if job.get('spider') == name:
+            aim_jobs.append(job.get('id'))
+    return aim_jobs

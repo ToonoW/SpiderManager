@@ -42,6 +42,6 @@ class Group(models.Model):
     """
     分组
     """
-    name = models.CharField(max_length=45, verbose_name='分组名称')
-    spider = models.ManyToManyField('Spider')
+    name = models.CharField(max_length=45, unique=True, verbose_name='分组名称')
+    spiders = models.ManyToManyField('Spider', blank=True)
     comment = models.CharField(max_length=128, blank=True, null=True, verbose_name='简介')

@@ -16,5 +16,5 @@ urlpatterns = [
     url(r'^spider_detial/(?P<pk>[0-9]+)$', api_views.SpiderDetial.as_view(), name='spider-detial'),
 
     url(r'^group_list$', api_views.GroupList.as_view(), name='group-list'),
-    url(r'^group_detial$', api_views.GroupDetial.as_view(), name='group-detial'),
+    url(r'^group_detial/(?P<pk>[0-9]+)$', api_views.GroupDetial.as_view(), name='group-detial'),
 ]

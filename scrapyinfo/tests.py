@@ -2,7 +2,7 @@ import json
 from django.test import TestCase, Client
 from django.core.urlresolvers import reverse
 
-from scrapyinfo import models, api_views
+from scrapyinfo import models
 from scrapyinfo.utils import scrapyinfo
 
 
@@ -122,7 +122,6 @@ class APITest(TestCase):
         测试刷新平台信息API
         """
         c = Client()
-        print(reverse('refresh-platform-information'))
         response = c.get(reverse('refresh-platform-information'))
         data = json.loads(response.content)
         status = data.get('status')

@@ -1,7 +1,3 @@
----
-typora-copy-images-to: ipic
----
-
 # 爬虫管理平台
 
 ## 主要功能

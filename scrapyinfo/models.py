@@ -8,7 +8,8 @@ class Scrapyd(models.Model):
     name = models.CharField(max_length=45, unique=True, verbose_name='部署平台名称')
     ip = models.CharField(max_length=45, blank=False, verbose_name='IP')
     port = models.CharField(max_length=45, verbose_name='端口')
-    comment = models.CharField(max_length=128, blank=True, null=True, verbose_name='简介')
+    comment = models.CharField(
+        max_length=128, blank=True, null=True, verbose_name='简介')
 
     def __str__(self):
         return "{} ({} : {})".format(self.name, self.ip, self.port)
@@ -19,8 +20,9 @@ class Project(models.Model):
     爬虫项目
     """
     name = models.CharField(max_length=45, verbose_name='项目名称')
-    scrapyd = models.ForeignKey('Scrapyd')
-    comment = models.CharField(max_length=128, blank=True, null=True, verbose_name='简介')
+    scrapyd = models.ForeignKey('Scrapyd', on_delete=models.CASCADE)
+    comment = models.CharField(
+        max_length=128, blank=True, null=True, verbose_name='简介')
 
     def __str__(self):
         return "{} : {}".format(self.scrapyd.name, self.name)
@@ -31,8 +33,9 @@ class Spider(models.Model):
     爬虫
     """
     name = models.CharField(max_length=45, verbose_name='爬虫名称')
-    project = models.ForeignKey('Project')
-    comment = models.CharField(max_length=128, blank=True, null=True, verbose_name='简介')
+    project = models.ForeignKey('Project', on_delete=models.CASCADE)
+    comment = models.CharField(
+        max_length=128, blank=True, null=True, verbose_name='简介')
 
     def __str__(self):
         return "{} : {}".format(self.project.name, self.name)
@@ -44,4 +47,5 @@ class Group(models.Model):
     """
     name = models.CharField(max_length=45, unique=True, verbose_name='分组名称')
     spiders = models.ManyToManyField('Spider', blank=True)
-    comment = models.CharField(max_length=128, blank=True, null=True, verbose_name='简介')
+    comment = models.CharField(
+        max_length=128, blank=True, null=True, verbose_name='简介')

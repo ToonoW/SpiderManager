@@ -159,3 +159,6 @@ typings/
 .idea
 *.sqlite3
 migrations/
+
+
+Pipfile.lock

@@ -4,10 +4,10 @@ from scrapycmd import views
 
 
 urlpatterns = [
-    path('run_spider$', views.RunSpider.as_view()),
-    path('run_group_spiders$', views.RunGroupSpiders.as_view()),
-    path('cancel_spider$', views.CancelSpider.as_view()),
-    path('cancel_group_spiders$', views.CancelGroupSpiders.as_view()),
-    path('query_spiders_log$', views.QuerySpidersLog.as_view()),
-    path('query_all_spiders_log$', views.QueryAllSpidersLog.as_view()),
+    path('runSpider/<int:spider_id>', views.RunSpider.as_view()),
+    path('runGroup/<int:group_id>', views.RunGroupSpiders.as_view()),
+    path('stopSpider/<int:spider_id>', views.CancelSpider.as_view()),
+    path('stopGroup/<int:group_id>', views.CancelGroupSpiders.as_view()),
+    path('jobs', views.QueryAllSpidersLog.as_view()),
+    # path('listJob//', views.QuerySpidersLog.as_view()),
 ]

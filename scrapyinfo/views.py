@@ -54,7 +54,7 @@ class ProjectDetial(generics.RetrieveUpdateAPIView):
 class SpiderList(generics.ListAPIView):
     queryset = models.Spider.objects.all()
     serializer_class = serializers.SpiderSerializer
-    filter_fields = ('id', 'name',)
+    filter_fields = ('id', 'name', 'project',)
 
 
 class SpiderDetial(generics.RetrieveUpdateAPIView):

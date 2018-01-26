@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "d09c1ad78babe908363c3f53a469ada34a4410045ab8bd5c2195d9fd06e95c76"
+            "sha256": "96bc0634e5532908f7c10475e4ae3ffb443e840b458812ac35945fec2cd1b2db"
         },
         "host-environment-markers": {
             "implementation_name": "cpython",
@@ -9,15 +9,17 @@
             "os_name": "posix",
             "platform_machine": "x86_64",
             "platform_python_implementation": "CPython",
-            "platform_release": "17.2.0",
-            "platform_system": "Darwin",
-            "platform_version": "Darwin Kernel Version 17.2.0: Fri Sep 29 18:27:05 PDT 2017; root:xnu-4570.20.62~3/RELEASE_X86_64",
+            "platform_release": "4.14.0-deepin2-amd64",
+            "platform_system": "Linux",
+            "platform_version": "#1 SMP PREEMPT Deepin 4.14.12-2 (2018-01-06)",
             "python_full_version": "3.6.2",
             "python_version": "3.6",
-            "sys_platform": "darwin"
+            "sys_platform": "linux"
         },
         "pipfile-spec": 6,
-        "requires": {},
+        "requires": {
+            "python_version": "3.6"
+        },
         "sources": [
             {
                 "name": "pypi",

@@ -159,3 +159,8 @@ typings/
 .idea
 *.sqlite3
 migrations/
+
+# VS Code
+.vscode/
+
+Pipfile.lock
